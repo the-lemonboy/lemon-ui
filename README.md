@@ -30,9 +30,8 @@ lemonui
 |    ├─assets
 ├─docs    //文档文件
 |  ├─docs
-|  |  ├─.DS_Store
 |  |  ├─README.md
-|  |  ├─components   //文档目录
+|  |  ├─components   //各个组件文档
 |  |  ├─.vuepress
             ├─dist
             ├─config.js   //配置文档
