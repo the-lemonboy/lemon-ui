@@ -1,6 +1,3 @@
-# CKView
-
-## 组件库目录
 lemonui
 ├─README.md
 ├─babel.config.js
@@ -43,37 +40,3 @@ lemonui
 |   ├─webpack.lib.prod.component.js   //打包生成各个组件
 |   ├─webpack.lib.prod.js    //将全部组件打包在一起
 |   └webpack.prod.js
-
-
-## 组件库文档
-
-[文档地址](baidu.com)
-
-## 组件
-
-- [x] Button
-- [x] 标题框
-- [x] 边框
-- [x] 加载组件
-
-## gitlab仓库
-
-[CKView 仓库地址](https://github.com/the-lemonboy/lemon-ui)
-
-
-
-## npm
-
-#### 版本管理
-
-~~~json
-```json
-  "name": "ck-view",
-  "version": "1.0.1",   //主版本号.次版本号.修订版本号
-  "description": "可视化大屏UI库",
-  "main": "lib/index.js",
-```
-~~~
-
-
-
