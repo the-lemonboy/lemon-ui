@@ -64,15 +64,12 @@ lemonui
 ## npm
 
 #### 版本管理
-
-~~~json
 ```json
   "name": "ck-view",
-  "version": "1.0.1",   //主版本号.次版本号.修订版本号
+  "version": "1.0.1", 
   "description": "可视化大屏UI库",
   "main": "lib/index.js",
 ```
-~~~
 
 
 
