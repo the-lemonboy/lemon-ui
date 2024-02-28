@@ -50,7 +50,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import {throttle} from '../../utils/throttle-debounce.js'
+import {throttle} from '../../utils/throttle-debounce'
 export default {
     name:"LETitleBox5",
     props: {
@@ -94,3 +94,20 @@ beforeDestroy(){
 }
 }
 </script>
+<style lang="scss" scoped>
+.l-title-border-five {
+    position: relative;
+}
+
+.l-border-svg-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.title-box-content {
+    position: relative;
+    left: 40px;
+    display: inline-block;
+}
+</style>

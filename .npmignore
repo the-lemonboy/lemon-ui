@@ -2,6 +2,8 @@
 node_modules
 /dist
 /build
+/examples
+/packages
 
 # local env files
 .env.local
@@ -21,13 +23,12 @@ yarn-error.log*
 *.sln
 *.sw*
 
-examples/
-packages/
-public/
-libs/
-babel.config.js
-postcss.config.js
-教程.MD
-.gitignore
-*.map
-*.html
+# Ignoring examples directory
+
+# libs/
+# babel.config.js
+# postcss.config.js
+# 教程.MD
+# .gitignore
+# *.map
+# *.html

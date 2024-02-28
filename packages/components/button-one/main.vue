@@ -1,7 +1,7 @@
 <template>
      <div class="l-button-box-one" :style="`width:${cornerWidth}px; height:${cornerHeight}px;`">
   <div class="l-button-box" :style="`border:1.5px solid ${borderColor[0]}; box-shadow:0 0 3px ${borderColor[0]},0 0 3px ${borderColor[0]} inset`">
-<button class="l-button" :class="disabled? 'isDisabled' : '' "  :style="`border-color:${borderColor[1]}; width:${getWidth}px; height:${getHeight}px;`"><slot></slot></button>
+<button class="l-button" :class="disabled? 'isDisabled' : '' "  :style="`border-color:${borderColor[1]}; width:${getWidth}px; height:${getHeight}px;`" @click="handleClick"><slot></slot></button>
   </div>
   <!-- 四角边框 -->
       <svg class="l-button-svg-container" :width="cornerWidth" :height="cornerHeight">
@@ -58,8 +58,47 @@ computed:{
         return this.getHeight+18;
     }
 },
+methods:{
+    handleClick(evt){
+        this.$emit('click', evt);
+    }
+}
 }
 </script>
+<style scoped lang="scss">
+.l-button-box{
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.l-button{
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    border-style: solid;
+    } 
+.l-button-svg-container{
+    width: 100%;
+    height: 100%;
+    & > polyline {
+      fill: none;
+      stroke-linecap: round;
+    }
+}
+.l-corner-one {
+    stroke-width: 5;
+  }
 
-<style lang="scss" scoped src="./style.scss">
+.l-button-box-one{
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.isDisabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 </style>

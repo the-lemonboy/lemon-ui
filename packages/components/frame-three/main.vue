@@ -68,6 +68,15 @@ data() {
     }
 }
 </script>
+<style lang="scss" scoped>
 
-<style lang="scss" scoped src="./style.scss">
+.l-border-box-three{
+  position: relative;
+}
+.l-border-svg-container {
+      position: absolute;
+    }
+.l-corner{
+  stroke-width:6
+}
 </style>

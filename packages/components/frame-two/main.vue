@@ -73,7 +73,7 @@
         },
         borderColor: {
             type: String,
-            default: "#D1DADA"
+            default: "#00B9FF"
         },
         cornerColor: {
             type: Array,
@@ -106,7 +106,12 @@
     }
   }
   </script>
-  
-
-<style lang="scss"  scoped src="./style.scss">
-</style>
+  <style lang="scss" scoped>
+    .l-border-box-two {
+        position: relative;
+        width: 100%;
+        height: 100%;}
+  .l-border-svg-container{
+    position: absolute;
+  }
+  </style>

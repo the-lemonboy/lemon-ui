@@ -1,47 +1,7 @@
-# CKView
+# LemonUI
 
 ## 组件库目录
-lemonui
-├─README.md
-├─babel.config.js
-├─npminstall-debug.log
-├─package-lock.json
-├─package.json
-├─postcss.config.js
-├─packages   //组件目录，webpack打包的也是这个目录文件
-|    ├─README.md
-|    ├─entry_config.js
-|    ├─index.js
-|    ├─utils
-|    ├─components
-├─lib                  //打包后的文件目录
-|  ├─lemonui.css
-|  ├─lemonui.css.map
-|  ├─lemonui.js      //打包的全局组件
-|  ├─lemonui.js.map
-|  ├─packages      //各组件目录，方便组件按需导入
-├─examples    //在这里面测试组件
-|    ├─App.vue
-|    ├─index.js
-|    ├─main.js
-|    ├─package.json
-|    ├─utils
-|    ├─components
-|    ├─assets
-├─docs    //文档文件
-|  ├─docs
-|  |  ├─README.md
-|  |  ├─components   //各个组件文档
-|  |  ├─.vuepress
-            ├─dist
-            ├─config.js   //配置文档
-├─build  //webpack打包配置
-|   ├─webpack.config.js
-|   ├─webpack.dev.js
-|   ├─webpack.lib.base.js
-|   ├─webpack.lib.prod.component.js   //打包生成各个组件
-|   ├─webpack.lib.prod.js    //将全部组件打包在一起
-|   └webpack.prod.js
+
 
 
 ## 组件库文档
@@ -65,11 +25,84 @@ lemonui
 
 #### 版本管理
 ```json
-  "name": "ck-view",
+  "name": "lemon-ui",
   "version": "1.0.1", 
   "description": "可视化大屏UI库",
   "main": "lib/index.js",
 ```
 
+## 安装
+### 通过npm安装
+```shell
+npm i lemon-ui-vue2 -S
+```
 
+### 通过yarn安装
+``` shell
+yarn add lemon-ui-vue2 -S
+```
+
+## 快速开始
+### 引入Lemon-ui
+你可以引入整个Lemon-ui，或是根据需要仅引入部分组件。我们先介绍如何引入完整的 Lemon-ui。
+
+### 完整引入
+在 main.js 中写入以下内容：
+
+```javascript
+import Vue from 'vue';
+import LemonUI from 'lemon-ui-vue2';
+import 'lemon-ui-vue2/lib/lemonui.css';
+import App from './App.vue';
+
+Vue.use(LemonUI);
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+```
+
+### 按需引入
+借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+
+首先，安装 babel-plugin-component：
+```javascript
+npm install babel-plugin-component -D
+```
+然后，将babel.config.js修改为
+```javascripte
+module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset'
+  ],
+  plugins: [
+    ['component',
+    {
+      libraryName:'lemon-ui-vue2',
+      libDir:'lib/packages',
+      camel2Dash:true
+    },
+  ],
+],
+}
+```
+接下来，如果你只希望引入部分组件，比如 BorderBox1 和 TitleBox1,那么需要在 main.js 中写入以下内容：
+```javascript
+import Vue from 'vue';
+import { BorderBox1, BorderBox1 } from 'element-ui';
+import App from './App.vue';
+
+Vue.component(BorderBox1.name, BorderBox1);
+Vue.component(TitleBox1.name, TitleBox1);
+/* 或写为
+ * Vue.use(BorderBox1)
+ * Vue.use(TitleBox1)
+ */
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+```
 

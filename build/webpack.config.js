@@ -11,7 +11,7 @@ const copyWebpackPlugin = require ('copy-webpack-plugin');
 module.exports = {
   // webpack打包的入口文件
   entry: {
-    main: path.resolve (__dirname, '../examples/main.js'),
+    main: path.resolve (__dirname, '../examples/bigscreen1/src/main.js'),
   },
   // webpack打包的输出相关的额配置
   output: {
@@ -40,7 +40,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(scss|sass|css)$/,
         // 这儿组件库的css一般都是处理过的，我们使用一般的loader即可
         use: [
           {

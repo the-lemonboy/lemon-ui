@@ -72,7 +72,15 @@
     }
   }
   </script>
-  
-  <style lang="scss" scoped src="./style.scss">
-  </style>
-  
+    <style scoped lang="scss">
+
+    .l-border-box-five{
+      position: relative;
+    .l-border-svg-container{
+      position: absolute;
+    }
+    }
+    .border-box-content{
+        position: relative;
+    }
+      </style>

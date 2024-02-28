@@ -52,6 +52,7 @@ module.exports = {
           },
         ],
       },
+      
     ],
   },
   plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],

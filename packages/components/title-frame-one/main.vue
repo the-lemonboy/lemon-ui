@@ -76,6 +76,20 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+.l-title-border-one {
+    position: relative;
+}
 
-<style lang="scss" scoped src="./style.scss">
+.l-border-svg-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.title-box-content {
+    position: relative;
+    left: 40px;
+    display: inline-block;
+}
 </style>

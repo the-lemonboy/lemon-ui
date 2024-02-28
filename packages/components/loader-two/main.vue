@@ -52,6 +52,17 @@ export default {
 
 }
 </script>
+<style lang="scss">
+.l-loading-two {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-<style lang="scss"  scoped src="./style.scss">
+  .loading-tip {
+    font-size: 15px;
+  }
+}
 </style>

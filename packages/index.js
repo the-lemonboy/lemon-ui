@@ -13,6 +13,7 @@ import Button2 from "./components/button-two";
 import Loader1 from "./components/loader-one";
 import Loader2 from "./components/loader-two";
 import Loader3 from "./components/loader-three";
+import ScreenAdaptive from './components/screen-adaptive'
 
 
 const components = [
@@ -30,7 +31,8 @@ const components = [
     Button2,
     Loader1,
     Loader2,
-    Loader3
+    Loader3,
+    ScreenAdaptive
 ]
 
 const install = function (Vue) {
@@ -60,4 +62,5 @@ export default {
     Loader1,
     Loader2,
     Loader3,
+    ScreenAdaptive
 }

@@ -1,6 +1,6 @@
 <template>
    <div class="l-button-box-two"  :style="` width:${getWidth}px; height:${getHeight}px;`">
-    <button class="l-button" :style="`width:${getWidth}px; height:${getHeight}px;`"><slot></slot></button>
+    <button class="l-button" :style="`width:${getWidth}px; height:${getHeight}px;`" @click="handleClick"><slot></slot></button>
        <svg class="l-button-svg-container" :width="`${getWidth}`" :height="`${getHeight}`" >
         <defs>
         <filter id="filterId" height="150%" width="150%" x="-20%" y="-20%">
@@ -57,8 +57,30 @@ export default {
       return converse(this.height, this.$refs.leTitleBox, 'height');
     }
   },
+  methods:{
+    handleClick(evt){
+        this.$emit('click', evt);
+    }
+  }
 }
 </script>
-
-<style lang="scss" scoped src="./style.scss">
+<style lang="scss" scoped>
+.l-button{
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    position: absolute;
+    color: white;
+  }
+  .l-button-box-two{
+      position: relative;
+  }
+  .l-button-svg-container{
+      width: 100%;
+      height: 100%;
+      & > polyline {
+        fill: none;
+        /* stroke-linecap: round; */
+      }
+  }
 </style>

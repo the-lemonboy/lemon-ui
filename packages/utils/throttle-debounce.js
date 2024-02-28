@@ -18,22 +18,17 @@ export const throttle = function(func, delay) {
     };
   };
   
-  export const debounce = function (func, delay, immediate) {
-    let timerId = null;
-
+  export function debounce(fn, delay) {
+    let timer;
     return function (...args) {
-      const executeLater = () => {
-        timerId = null;
-        if (!immediate) {
-          func.apply(this, args);
+      if (timer) clearTimeout(timer);
+  
+      timer = setTimeout(() => {
+        if (typeof fn === 'function') {
+          fn.apply(null, args);
         }
-      };
-      const shouldExecuteNow = immediate && !timerId;
-      clearTimeout(timerId);
-      timerId = setTimeout(executeLater, delay);
-      if (shouldExecuteNow) {
-        func.apply(this, args);
-      }
-    };
+        clearTimeout(timer);
+      }, delay > 0 ? delay : 100);
+    }
   }
   

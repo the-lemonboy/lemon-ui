@@ -1,13 +1,21 @@
 {
-  root: '/Users/lemon/Desktop/lemonui',
+  root: '/Users/lemon/Desktop/学习室/lemonui/lemonui',
   registry: 'https://registry.npmmirror.com',
-  pkgs: [],
+  pkgs: [
+    {
+      name: 'babel',
+      version: '7',
+      type: 'range',
+      alias: undefined,
+      arg: [Result]
+    }
+  ],
   production: false,
   cacheStrict: false,
   cacheDir: null,
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/Users/lemon/.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","treer","-g"],"original":["--fix-bug-versions","--china","--userconfig=/Users/lemon/.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","treer","-g"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/Users/lemon/.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","babel@7"],"original":["--fix-bug-versions","--china","--userconfig=/Users/lemon/.cnpmrc","--disturl=https://npmmirror.com/mirrors/node","--registry=https://registry.npmmirror.com","babel@7"]}',
     npm_config_user_agent: 'npminstall/7.4.0 npm/? node/v14.19.0 darwin x64',
     NODE: '/usr/local/bin/node',
     npm_node_execpath: '/usr/local/bin/node',
@@ -40,8 +48,8 @@
     npm_config_sharp_binary_host: 'https://cdn.npmmirror.com/binaries/sharp',
     npm_config_sharp_libvips_binary_host: 'https://cdn.npmmirror.com/binaries/sharp-libvips',
     npm_config_robotjs_binary_host: 'https://cdn.npmmirror.com/binaries/robotjs',
-    npm_rootpath: '/Users/lemon/Desktop/lemonui',
-    INIT_CWD: '/Users/lemon/Desktop/lemonui',
+    npm_rootpath: '/Users/lemon/Desktop/学习室/lemonui/lemonui',
+    INIT_CWD: '/Users/lemon/Desktop/学习室/lemonui/lemonui',
     npm_config_cache: '/Users/lemon/.npminstall_tarball'
   },
   binaryMirrors: {
@@ -177,19 +185,17 @@
   disableFallbackStore: false,
   workspacesMap: Map(0) {},
   enableWorkspace: false,
-  workspaceRoot: '/Users/lemon/Desktop/lemonui',
+  workspaceRoot: '/Users/lemon/Desktop/学习室/lemonui/lemonui',
   isWorkspaceRoot: true,
   isWorkspacePackage: false,
   strictSSL: true,
   ignoreScripts: false,
   ignoreOptionalDependencies: false,
-  detail: true,
+  detail: false,
   forceLinkLatest: false,
   trace: false,
   engineStrict: false,
   registryOnly: false,
   client: false,
-  autoFixVersion: [Function: autoFixVersion],
-  targetDir: null,
-  binDir: null
+  autoFixVersion: [Function: autoFixVersion]
 }

@@ -77,6 +77,11 @@ export default {
 }
 
 </script>
-
-<style lang="scss" scoped src="./style.scss">
+<style lang="scss" scoped>
+.l-title-border-two{
+    position: relative;
+.l-border-svg-top-container{
+   position:absolute;
+}
+}
 </style>
