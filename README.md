@@ -1,12 +1,10 @@
-# LemonUI
+# Lemon-ui
 
 ## 组件库目录
 
-
-
 ## 组件库文档
 
-[文档地址](baidu.com)
+[文档地址](http://39.99.228.188:8003/)
 
 ## 组件
 
@@ -17,7 +15,7 @@
 
 ## gitlab仓库
 
-[CKView 仓库地址](https://github.com/the-lemonboy/lemon-ui)
+[Lemon-ui 仓库地址](https://github.com/the-lemonboy/lemon-ui)
 
 
 
@@ -25,7 +23,7 @@
 
 #### 版本管理
 ```json
-  "name": "lemon-ui",
+  "name": "Lemon-ui",
   "version": "1.0.1", 
   "description": "可视化大屏UI库",
   "main": "lib/index.js",
