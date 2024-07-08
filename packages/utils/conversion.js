@@ -1,5 +1,12 @@
 
-
+/**
+ * 
+ * @param {需要转换到值} param 
+ * @param {父节点} node 
+ * @param {key} direction 
+ * @param {不能小于的值} ask 
+ * @returns 
+ */
 export const converse =  function(param,node,direction,ask){
         const unit = param.replace(/\d/g, "")
         const number = parseFloat(param.match(/\d+/)[0]);

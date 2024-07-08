@@ -1,6 +1,6 @@
 {
   "name": "lemon-ui-vue2",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "description": "可视化大屏UI库",
   "main": "lib/lemonui.js",
   "scripts": {
@@ -13,8 +13,10 @@
     "lib:component": "webpack --config ./build/webpack.lib.prod.component.js",
     "lib:style": "webpack --config ./build/webpack.lib.style.js"
   },
+  "homepage": "https://github.com/the-lemonboy/lemon-ui",
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/the-lemonboy/lemon-ui"
   },
   "keywords": [
     "UI",
