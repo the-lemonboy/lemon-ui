@@ -99,9 +99,16 @@ export default {
     },
     data() {
         return {
-            getWidth: converse(this.width, this.$refs.leTitleBox, 'width', 1200),
-            getHeight: converse(this.height, this.$refs.leTitleBox, 'height', 80),
-            getTitleWidth: converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100)
+            getWidth: 0,
+            getHeight: 0,
+            getTitleWidth: 0
+        }
+    },
+    methods: {
+        initData() {
+            this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 1200)
+            this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 80)
+            this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100)
         }
     },
     mounted() {

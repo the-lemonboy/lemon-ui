@@ -72,7 +72,16 @@ export default {
       getTitleHeight: converse(this.titleHeight, this.$refs.leTitleBox, 'height', 50)
     }
   },
+  methods: {
+    initData() {
+      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width')
+      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height')
+      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50)
+      this.getTitleHeight = converse(this.titleHeight, this.$refs.leTitleBox, 'width', 50)
+    }
+  },
   mounted() {
+    this.initData()
     window.addEventListener('resize', throttle(() => {
       this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width')
       this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height')

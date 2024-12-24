@@ -55,11 +55,18 @@ export default {
   },
   data() {
     return {
-      getWidth: converse(this.width, this.$refs.leFrameBox, 'width'),
-      getHeight: converse(this.height, this.$refs.leFrameBox, 'height'),
+      getWidth: 0,
+      getHeight: 0,
+    }
+  },
+  methods: {
+    initData() {
+      this.getWidth = converse(this.width, this.$refs.leTitleBox, "width", 200)
+      this.getHeight = converse(this.height, this.$refs.leTitleBox, "height", 20)
     }
   },
   mounted() {
+    this.initData()
     window.addEventListener('resize', throttle(() => {
       this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width')
       this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height')

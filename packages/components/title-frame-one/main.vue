@@ -67,8 +67,14 @@ export default {
     },
     data() {
         return {
-            getWidth: converse(this.width, this.$refs.leTitleBox, 'width', 100),
-            getHeight: converse(this.height, this.$refs.leTitleBox, 'height', 20),
+            getWidth: 0,
+            getHeight: 0,
+        }
+    },
+    methods: {
+        initData() {
+            this.getWidth = converse(this.width, this.$refs.leTitleBox, "width", 100)
+            this.getHeight = converse(this.height, this.$refs.leTitleBox, "height", 20)
         }
     },
     mounted() {
@@ -86,11 +92,13 @@ export default {
 .l-title-border-one {
     position: relative;
 }
+
 .l-border-svg-container {
     position: absolute;
     left: 0;
     top: 0;
 }
+
 .title-box-content {
     position: relative;
     left: 40px;
