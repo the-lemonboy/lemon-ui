@@ -1,9 +1,9 @@
-.DS_Store
-node_modules
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
 /dist
-# local env files
-.env.local
-.env.*.local
 
 # Log files
 npm-debug.log*
@@ -17,3 +17,13 @@ yarn-debug.log*
 *.njsproj
 *.sln
 *.sw*
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.idea
+
+npminstall-debug.log

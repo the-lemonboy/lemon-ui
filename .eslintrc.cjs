@@ -21,7 +21,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'eslint:recommended',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/vue2-recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'prettier', // 增加 prettier 相关的校验规则
