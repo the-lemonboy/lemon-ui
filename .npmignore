@@ -1,8 +1,6 @@
 .DS_Store
 node_modules
 /dist
-/examples
-/packages
 # local env files
 .env.local
 .env.*.local
@@ -19,13 +17,3 @@ yarn-debug.log*
 *.njsproj
 *.sln
 *.sw*
-
-# Ignoring examples directory
-
-# libs/
-# babel.config.js
-# postcss.config.js
-# 教程.MD
-# .gitignore
-# *.map
-# *.html
