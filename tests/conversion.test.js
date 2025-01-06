@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { converse } from '../../packages/utils/conversion';
+import { converse } from '../packages/utils/conversion';
 
 describe('converse', () => {
   beforeEach(() => {
