@@ -27,3 +27,7 @@ yarn-debug.log*
 .idea
 
 npminstall-debug.log
+
+# docs
+/docs/node_modules
+/docs/dist

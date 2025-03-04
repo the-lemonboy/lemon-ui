@@ -1,0 +1,23 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-register-components": "^1.9.9",
+    "vuepress": "^1.9.10"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "deploy-gh": "GH=1 yarn docs:build && bash scripts/deploy-gh.sh"
+  },
+  "dependencies": {
+    "core-js": "^2.0.0",
+    "lemon-ui-vue2": "^1.2.18",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^7.3.1",
+    "vuepress-plugin-demo-container": "^0.2.0",
+    "webpack": "^4.23.0"
+  }
+}
