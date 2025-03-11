@@ -64,9 +64,6 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {};
-  },
   computed: {
     getWidth() {
       return converse(this.width, this.$refs.leTitleBox, 'width');

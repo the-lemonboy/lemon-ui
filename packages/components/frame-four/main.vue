@@ -46,7 +46,6 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
   name: 'LEBorderBox4',
@@ -78,36 +77,19 @@ export default {
       default: 'transparent',
     },
   },
-  data() {
-    return {
-      getWidth: converse(this.width, this.$refs.leFrameBox, 'width'),
-      getHeight: converse(this.height, this.$refs.leFrameBox, 'height'),
-      getTitleWidth: converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50),
-      getTitleHeight: converse(this.titleHeight, this.$refs.leTitleBox, 'height', 50),
-    };
-  },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width');
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height');
-      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
-      this.getTitleHeight = converse(this.titleHeight, this.$refs.leTitleBox, 'width', 50);
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leFrameBox, 'width');
     },
-  },
-  mounted() {
-    this.initData();
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width');
-        this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height');
-        this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
-        this.getTitleHeight = converse(this.titleHeight, this.$refs.leTitleBox, 'height', 50);
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
+    getHeight() {
+      return converse(this.height, this.$refs.leFrameBox, 'height');
+    },
+    getTitleWidth() {
+      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
+    },
+    getTitleHeight() {
+      return converse(this.titleHeight, this.$refs.leTitleBox, 'height', 50);
+    },
   },
 };
 </script>

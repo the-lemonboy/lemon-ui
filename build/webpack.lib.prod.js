@@ -56,7 +56,7 @@ module.exports = merge (webpackLibBaseConfig, {
     }),
     // 压缩css
     new optimizeCssnanoPlugin ({
-      sourceMap: true,
+      sourceMap: false,
       cssnanoOptions: {
         preset: [
           'default',

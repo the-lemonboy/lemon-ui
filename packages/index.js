@@ -12,6 +12,7 @@ import ScreenAdaptive from './components/screen-adaptive';
 import TitleBox5 from './components/title-frame-five';
 import TitleBox4 from './components/title-frame-four';
 import TitleBox1 from './components/title-frame-one';
+import TitleBox6 from './components/title-frame-six';
 import TitleBox3 from './components/title-frame-three';
 import TitleBox2 from './components/title-frame-two';
 
@@ -31,6 +32,7 @@ const components = [
   Loader1,
   Loader2,
   Loader3,
+  TitleBox6,
   ScreenAdaptive,
 ];
 
@@ -61,5 +63,6 @@ export default {
   Loader1,
   Loader2,
   Loader3,
+  TitleBox6,
   ScreenAdaptive,
 };

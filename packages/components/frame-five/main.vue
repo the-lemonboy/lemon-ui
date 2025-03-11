@@ -55,7 +55,6 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
   name: 'LEBorderBox5',
@@ -85,28 +84,13 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      getWidth: 0,
-      getHeight: 0,
-    };
-  },
-  initData() {
-    this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width');
-    this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height');
-  },
-  mounted() {
-    this.initData();
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width');
-        this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height');
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leFrameBox, 'width');
+    },
+    getHeight() {
+      return converse(this.height, this.$refs.leFrameBox, 'height');
+    },
   },
 };
 </script>

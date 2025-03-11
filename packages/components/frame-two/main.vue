@@ -82,7 +82,6 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
   name: 'LEBorderBox2',
@@ -114,36 +113,23 @@ export default {
       default: 'transparent',
     },
   },
+  computed: {
+    getTitleHeight() {
+      return converse(this.titleHeight, this.$refs.leFrameBox, 'height');
+    },
+    getWidth() {
+      return converse(this.width, this.$refs.leFrameBox, 'width');
+    },
+    getHeight() {
+      return converse(this.height, this.$refs.leFrameBox, 'height');
+    },
+  },
   data() {
     return {
-      getWidth: 0,
-      getHeight: 0,
-      getTitleHeight: 0,
       gradient: 'gradient',
       mask: 'mask',
       path: 'path',
     };
-  },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width');
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height');
-      this.getTitleHeight = converse(this.titleWidth, this.$refs.leTitleBox, 'width');
-    },
-  },
-  mounted() {
-    this.initData();
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leFrameBox, 'width');
-        this.getHeight = converse(this.height, this.$refs.leFrameBox, 'height');
-        this.getTitleHeight = converse(this.titleHeight, this.$refs.leFrameBox, 'height');
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
   },
 };
 </script>

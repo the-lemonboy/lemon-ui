@@ -99,31 +99,13 @@ export default {
       default: 'orange',
     },
   },
-
-  data() {
-    return {
-      getWidth: 0,
-      getHeight: 0,
-    };
-  },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 200);
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 20);
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leTitleBox, 'width', 200);
     },
-  },
-  mounted() {
-    this.initData();
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 200);
-        this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 20);
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
+    getHeight() {
+      return converse(this.height, this.$refs.leTitleBox, 'height', 20);
+    },
   },
 };
 </script>

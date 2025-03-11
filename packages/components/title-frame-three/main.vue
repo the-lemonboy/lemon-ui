@@ -109,7 +109,6 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
   name: 'LETitleBox3',
@@ -137,32 +136,16 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      getWidth: 0,
-      getHeight: 0,
-      getTitleWidth: 0,
-    };
-  },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 300);
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 20);
-      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leTitleBox, 'width', 300);
     },
-  },
-  mounted() {
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 300);
-        this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 20);
-        this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
+    getHeight() {
+      return converse(this.height, this.$refs.leTitleBox, 'height', 20);
+    },
+    getTitleWidth() {
+      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
+    },
   },
 };
 </script>

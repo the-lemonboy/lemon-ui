@@ -127,32 +127,16 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      getWidth: 0,
-      getHeight: 0,
-      getTitleWidth: 0,
-    };
-  },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 1200);
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 80);
-      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100);
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leTitleBox, 'width', 1200);
     },
-  },
-  mounted() {
-    window.addEventListener(
-      'resize',
-      throttle(() => {
-        this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 1200);
-        this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 80);
-        this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100);
-      }, 1000),
-    );
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
+    getHeight() {
+      return converse(this.height, this.$refs.leTitleBox, 'height', 80);
+    },
+    getTitleWidth() {
+      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100);
+    },
   },
 };
 </script>
