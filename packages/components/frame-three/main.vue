@@ -90,6 +90,7 @@
 <script>
 import { converse } from '../../utils/conversion';
 import { throttle } from '../../utils/throttle-debounce.js';
+
 export default {
   name: 'LEBorderBox3',
   props: {
@@ -120,9 +121,9 @@ export default {
   },
   methods: {
     initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, "width", 200)
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, "height", 20)
-    }
+      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 200);
+      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 20);
+    },
   },
   mounted() {
     this.initData();

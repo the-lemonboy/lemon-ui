@@ -10,7 +10,7 @@ const optimizeCssnanoPlugin = require ('@intervolga/optimize-cssnano-plugin');
 
 module.exports = merge (webpackLibBaseConfig, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: false,
   entry: {
     lemonui: path.resolve (__dirname, '../packages/index.js'),
   },

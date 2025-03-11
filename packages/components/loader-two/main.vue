@@ -41,17 +41,17 @@
 
 <script>
 export default {
-  name: "LELoading2",
+  name: 'LELoading2',
   props: {
     backgroundColor: {
       type: Array,
       default: () => {
-        return ["#511BD6"];
+        return ['#511BD6'];
       },
     },
     textColor: {
       type: String,
-      default: "#DCEFED",
+      default: '#DCEFED',
     },
   },
 };

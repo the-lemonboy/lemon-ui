@@ -1,22 +1,23 @@
 // build/webpack.config.js
 // node.js里面自带的操作路径的模块
-const path = require ('path');
+const path = require('path');
+
 // 引入htmlWebpackPlugin自动导入js文件
-const htmlWebpackPlugin = require ('html-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 // 引入vue-loader插件
-const VueLoaderPlugin = require ('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader');
 // 拷贝静态资源
-const copyWebpackPlugin = require ('copy-webpack-plugin');
 
 module.exports = {
   // webpack打包的入口文件
   entry: {
-    main: path.resolve (__dirname, '../examples/bigscreen1/src/main.js'),
+    lemonui: path.resolve(__dirname, '../packages/index.js'),
   },
   // webpack打包的输出相关的额配置
   output: {
     // 打包过后的文件的输出的路径
-    path: path.resolve (__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist'),
     // 打包后生成的js文件，带hash值来保证文件的唯一性
     filename: 'js/[name].[hash:4].js',
     // 生成的chunk文件名
@@ -101,6 +102,7 @@ module.exports = {
             options: {
               compilerOptions: {
                 preserveWhitespace: false,
+                prettify: false,
               },
             },
           },
@@ -109,18 +111,18 @@ module.exports = {
     ],
   },
   plugins: [
-    new htmlWebpackPlugin ({
+    new htmlWebpackPlugin({
       // 指定模板
-      template: path.resolve (__dirname, '../public/index.html'),
+      template: path.resolve(__dirname, '../public/index.html'),
       // 输出的文件
-      filename: path.resolve (__dirname, '../dist/index.html'),
+      filename: path.resolve(__dirname, '../dist/index.html'),
     }),
-    new VueLoaderPlugin (),
+    new VueLoaderPlugin(),
     // 拷贝静态资源
-    new copyWebpackPlugin ([
+    new copyWebpackPlugin([
       {
-        from: path.resolve (__dirname, '../public'),
-        to: path.resolve (__dirname, '../dist'),
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist'),
       },
     ]),
   ],
@@ -129,8 +131,8 @@ module.exports = {
       // 写了这句，我们可以这样写代码 import Vue from 'vue'
       vue$: 'vue/dist/vue.runtime.esm.js',
       // 写了这句，我们可以这样写代码 import api from '@/api/api.js'，省去到处找路径定位到src的麻烦
-      '@': path.resolve (__dirname, '../examples'),
-      UI: path.resolve (__dirname, '../packages/components'),
+      '@': path.resolve(__dirname, '../examples'),
+      UI: path.resolve(__dirname, '../packages/components'),
     },
     // 添加一个 resolve.extensions 属性，方便我们引入依赖或者文件的时候可以省略后缀
     // 我们在引入文件时可以这样写 import api from '@/api/api'。

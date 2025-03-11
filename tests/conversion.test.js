@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+
 import { converse } from '../packages/utils/conversion';
 
 describe('converse', () => {
@@ -42,7 +43,7 @@ describe('converse', () => {
     const result = converse('100px', document.body, 'width', 0);
     expect(result).toBe(100);
   });
-  
+
   it('should convert % to px correctly', () => {
     const parentNode = document.createElement('div');
     parentNode.style.width = '200px';
