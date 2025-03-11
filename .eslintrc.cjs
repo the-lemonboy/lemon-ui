@@ -90,5 +90,6 @@ module.exports = {
     ],
 
     'prettier/prettier': 'warn',
+    'func-names': 'off'
   },
 };

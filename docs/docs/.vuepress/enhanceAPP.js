@@ -1,8 +1,4 @@
-// import lemon from 'lemon-ui-vue2'
-import 'lemon-ui-vue2/lib/theme-chalk/lemonui.css'
-// import '../../lib/theme-chalk/lemonui.css'
-// // import 'lemon-ui-vue2/lib/theme-chalk/src/index.scss'
-// import '../../theme-chalk/src/index.scss'
+import '../../../lib/lemonui.css'
 
 export default ({
   Vue
@@ -10,7 +6,7 @@ export default ({
 
   Vue.mixin({
     mounted() {
-        var lemon = require('lemon-ui-vue2')
+        var lemon = require('../../../lib/lemonui.js')
         Vue.use(lemon)
     },
 })

@@ -1,9 +1,11 @@
 // 库打包的主要配置
 // 引入vue-loader插件
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require('path');
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // 引入清除打包后文件的插件（最新版的需要解构，不然会报不是构造函数的错，而且名字必须写CleanWebpackPlugin）
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-const path = require('path')
+
 module.exports = {
   // 我们打包组件库时不需要把Vue打包进去
   externals: {
@@ -46,13 +48,13 @@ module.exports = {
             loader: 'vue-loader',
             options: {
               compilerOptions: {
+                prettify: false,
                 preserveWhitespace: false,
               },
             },
           },
         ],
       },
-      
     ],
   },
   plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],
@@ -64,4 +66,4 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue'],
   },
-}
+};

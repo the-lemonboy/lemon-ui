@@ -1,6 +1,6 @@
 export default {
   test: {
     environment: 'jsdom',
-    include: ['tests/unit/**/*.test.js']
-  }
+    include: ['tests/unit/**/*.test.js'],
+  },
 };

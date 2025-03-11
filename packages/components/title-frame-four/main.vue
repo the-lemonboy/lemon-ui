@@ -1,6 +1,9 @@
 <template>
-  <div class="l-title-border-four" ref="leTitleBox" :style="` width:${getWidth}px; height:${getHeight}px;`">
-
+  <div
+    class="l-title-border-four"
+    ref="leTitleBox"
+    :style="` width:${getWidth}px; height:${getHeight}px;`"
+  >
     <svg class="l-border-svg-container" :width="getWidth" :height="getHeight">
       <defs>
         <filter id="filterId1" height="200%" width="200%" x="-20%" y="-20%">
@@ -27,19 +30,43 @@
           <stop offset="100%" :stop-color="borderColor[1]" />
         </linearGradient>
       </defs>
-      <path fill="none" :stroke="borderColor[0]" filter="url(#filterId1)"
-        :d="`M 0,2 L ${getTitleWidth},2 C ${getTitleWidth + 20},2 ${getTitleWidth + 20},${getHeight - 2} ${getTitleWidth + 40},${getHeight - 2} L ${getTitleWidth + 50},${getHeight - 2}`">
-      </path>
+      <path
+        fill="none"
+        :stroke="borderColor[0]"
+        filter="url(#filterId1)"
+        :d="`M 0,2 L ${getTitleWidth},2 C ${getTitleWidth + 20},2 ${getTitleWidth + 20},${getHeight - 2} ${getTitleWidth + 40},${getHeight - 2} L ${getTitleWidth + 50},${getHeight - 2}`"
+      ></path>
       <!-- 左边开头 -->
       <!-- <rect :fill="borderColor[0]" x="0" y="10" width="10" :height="`${getHeight-10}`"></rect> -->
-      <polygon fill="url(#Gradient1)"
-        :points="`${getTitleWidth + 50},${getHeight - 1} ${getWidth},${getHeight - 1} ${getWidth},${getHeight / 2} ${getTitleWidth + 40},${getHeight / 2}`">
-      </polygon>
-      <rect :fill="borderColor[0]" :x="`${getWidth - 15}`" :y="`${getHeight / 2 - 10}`" width="15" height="6"></rect>
+      <polygon
+        fill="url(#Gradient1)"
+        :points="`${getTitleWidth + 50},${getHeight - 1} ${getWidth},${getHeight - 1} ${getWidth},${getHeight / 2} ${getTitleWidth + 40},${getHeight / 2}`"
+      ></polygon>
+      <rect
+        :fill="borderColor[0]"
+        :x="`${getWidth - 15}`"
+        :y="`${getHeight / 2 - 10}`"
+        width="15"
+        height="6"
+      ></rect>
       <!-- <line stroke="url(#Gradient1)" :x1="`${getWidth-15}`" :y1="`${getHeight/2-7}`" :x2="`${getTitleWidth+40}`" :y2="`${getHeight/2-7}`"></line> -->
-      <rect :x="`${getWidth - 15}`" :y="`${getHeight / 2 - 7}`" width="100" height="1" fill="url(#Gradient2)">
-        <animate attributeName="x" :from="`${getWidth - 15}`" :to="`${getTitleWidth + 40}`" :dur="`${dur}s`"
-          calcMode="spline" keyTimes="0;1" keySplines="0.42,0,0.58,1" repeatCount="indefinite" />
+      <rect
+        :x="`${getWidth - 15}`"
+        :y="`${getHeight / 2 - 7}`"
+        width="100"
+        height="1"
+        fill="url(#Gradient2)"
+      >
+        <animate
+          attributeName="x"
+          :from="`${getWidth - 15}`"
+          :to="`${getTitleWidth + 40}`"
+          :dur="`${dur}s`"
+          calcMode="spline"
+          keyTimes="0;1"
+          keySplines="0.42,0,0.58,1"
+          repeatCount="indefinite"
+        />
       </rect>
     </svg>
     <div class="title-box-content">
@@ -50,56 +77,46 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js'
+import { throttle } from '../../utils/throttle-debounce.js';
+
 export default {
-  name: "LETitleBox4",
+  name: 'LETitleBox4',
   props: {
     width: {
       type: String,
-      default: '300px'
+      default: '300px',
     },
     height: {
       type: String,
-      default: '30px'
+      default: '30px',
     },
     titleWidth: {
       type: String,
-      default: '150px'
+      default: '150px',
     },
     dur: {
       type: Number,
-      default: 3
+      default: 3,
     },
     borderColor: {
       type: Array,
-      default: () => { return ['#7AB9F5', '#7AB9F5'] }
-    }
+      default: () => {
+        return ['#7AB9F5', '#7AB9F5'];
+      },
+    },
   },
-  data() {
-    return {
-      getWidth: 0,
-      getHeight: 0,
-      getTitleWidth: 0
-    }
+  computed: {
+    getWidth() {
+      return converse(this.width, this.$refs.leTitleBox, 'width', 300);
+    },
+    getHeight() {
+      return converse(this.height, this.$refs.leTitleBox, 'height', 30);
+    },
+    getTitleWidth() {
+      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
+    },
   },
-  methods: {
-    initData() {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 300)
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 30)
-      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50)
-    }
-  },
-  mounted() {
-    window.addEventListener('resize', throttle(() => {
-      this.getWidth = converse(this.width, this.$refs.leTitleBox, 'width', 300)
-      this.getHeight = converse(this.height, this.$refs.leTitleBox, 'height', 30)
-      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50)
-    }, 1000))
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', throttle);
-  }
-}
+};
 </script>
 <style lang="scss" scoped>
 .l-title-border-four {
