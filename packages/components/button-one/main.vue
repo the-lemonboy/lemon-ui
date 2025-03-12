@@ -1,42 +1,28 @@
 <template>
-  <div class="l-button-box-one" :style="`width:${cornerWidth}px; height:${cornerHeight}px;`">
-    <div
-      class="l-button-box"
-      :style="`border:1.5px solid ${borderColor[0]}; box-shadow:0 0 3px ${borderColor[0]},0 0 3px ${borderColor[0]} inset`"
-    >
-      <button
-        class="l-button"
-        :class="disabled ? 'isDisabled' : ''"
-        :style="`border-color:${borderColor[1]}; width:${getWidth}px; height:${getHeight}px;`"
-        @click="handleClick"
-      >
+  <div ref="leButtonBoxOne" class="l-button-box-one" :style="`width:${cornerWidth}px; height:${cornerHeight}px;`">
+    <div class="l-button-box"
+      :style="`border:1.5px solid ${borderColor[0]}; box-shadow:0 0 3px ${borderColor[0]},0 0 3px ${borderColor[0]} inset`">
+      <button class="l-button" :class="disabled ? 'isDisabled' : ''"
+        :style="`border-color:${borderColor[1]}; width:${getWidth}px; height:${getHeight}px;`" @click="handleClick">
         <slot></slot>
       </button>
     </div>
     <!-- 四角边框 -->
     <svg class="l-button-svg-container" :width="cornerWidth" :height="cornerHeight">
       <polyline class="l-corner-one" :stroke="cornerColor" :points="`0, 10 0, 0 10, 0`" />
-      <polyline
-        class="l-corner-one"
-        :stroke="cornerColor"
-        :points="`${cornerWidth - 10}, 0 ${cornerWidth}, 0 ${cornerWidth}, 10`"
-      />
-      <polyline
-        class="l-corner-one"
-        :stroke="cornerColor"
-        :points="`${cornerWidth - 10}, ${cornerHeight} ${cornerWidth}, ${cornerHeight} ${cornerWidth}, ${cornerHeight - 10}`"
-      />
-      <polyline
-        class="l-corner-one"
-        :stroke="cornerColor"
-        :points="`0, ${cornerHeight - 10} 0, ${cornerHeight} 10, ${cornerHeight}`"
-      />
+      <polyline class="l-corner-one" :stroke="cornerColor"
+        :points="`${cornerWidth - 10}, 0 ${cornerWidth}, 0 ${cornerWidth}, 10`" />
+      <polyline class="l-corner-one" :stroke="cornerColor"
+        :points="`${cornerWidth - 10}, ${cornerHeight} ${cornerWidth}, ${cornerHeight} ${cornerWidth}, ${cornerHeight - 10}`" />
+      <polyline class="l-corner-one" :stroke="cornerColor"
+        :points="`0, ${cornerHeight - 10} 0, ${cornerHeight} 10, ${cornerHeight}`" />
     </svg>
   </div>
 </template>
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEButton1',
@@ -64,24 +50,40 @@ export default {
       default: false,
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leTitleBox, 'width');
-    },
-    getHeight() {
-      return converse(this.height, this.$refs.leTitleBox, 'height');
-    },
-    cornerWidth() {
-      return this.getWidth + 18;
-    },
-    cornerHeight() {
-      return this.getHeight + 18;
-    },
+  data() {
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      cornerWidth: 0,
+      cornerHeight: 0,
+      resizeHandler: null,
+    }
   },
   methods: {
     handleClick(evt) {
       this.$emit('click', evt);
     },
+    initData() {
+      this.$nextTick(() => {
+        if (this.$refs.leButtonBoxOne) {
+          this.getWidth = converse(this.width, this.$refs.leButtonBoxOne, 'width');
+          this.getHeight = converse(this.height, this.$refs.leButtonBoxOne, 'height');
+          this.cornerWidth = this.getWidth + 18;
+          this.cornerHeight = this.getHeight + 18;
+        }
+      })
+    }
+  },
+  mounted() {
+    this.initData();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leButtonBoxOne, 'width', 100);
+      this.getHeight = converse(this.height, this.$refs.leButtonBoxOne, 'height');
+    }, 1000);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
 };
 </script>
@@ -106,7 +108,7 @@ export default {
   width: 100%;
   height: 100%;
 
-  & > polyline {
+  &>polyline {
     fill: none;
     stroke-linecap: round;
   }

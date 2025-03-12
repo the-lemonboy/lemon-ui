@@ -1,5 +1,5 @@
 <template>
-  <div class="l-border-box-five" :style="`width:${getWidth}px; height:${getHeight}px;`">
+  <div ref="leFrameBoxFive" class="l-border-box-five" :style="`width:${getWidth}px; height:${getHeight}px;`">
     <svg class="l-border-svg-container" :width="`${getWidth}`" :height="`${getHeight}`">
       <defs>
         <filter id="filterId1" height="200%" width="200%" x="-100%" y="0">
@@ -13,38 +13,23 @@
           </feMerge>
         </filter>
       </defs>
-      <polygon
-        :fill="cornerColor[0]"
-        :points="`${getWidth - 55},0 ${getWidth},0 ${getWidth},55 ${getWidth - 5},50 ${getWidth - 5},5 ${getWidth - 50},5`"
-      ></polygon>
-      <polygon
-        :fill="cornerColor[0]"
-        :points="`0,${getHeight - 55} 0,${getHeight} 55,${getHeight} 50,${getHeight - 5} 5,${getHeight - 5} 5,${getHeight - 50}`"
-      ></polygon>
-      <polyline
-        :fill="backgroundColor"
-        :stroke="borderColor[0]"
-        stroke-width="0.5"
-        :points="`0,0 ${getWidth - 58},0 ${getWidth - 51},8 ${getWidth - 8},8 ${getWidth - 8},51 ${getWidth},58 ${getWidth},${getHeight} 59,${getHeight} 50,${getHeight - 8} 8,${getHeight - 8} 8,${getHeight - 52} 0,${getHeight - 59} 0,0`"
-      ></polyline>
-      <polygon
-        :fill="cornerColor[1]"
-        :points="`${getWidth - 11},11 ${getWidth - 11},21 ${getWidth - 21},11`"
-      ></polygon>
-      <polygon
-        :fill="cornerColor[1]"
-        :points="`12,${getHeight - 11} 22,${getHeight - 11} 12,${getHeight - 22}`"
-      ></polygon>
-      <polygon
-        filter="url(#filterId1)"
-        :points="`3,30 3,${getHeight - 100} 2,${getHeight - 100} 2,30`"
-        :fill="borderColor[1]"
-      ></polygon>
-      <polygon
-        filter="url(#filterId1)"
+      <polygon :fill="cornerColor[0]"
+        :points="`${getWidth - 55},0 ${getWidth},0 ${getWidth},55 ${getWidth - 5},50 ${getWidth - 5},5 ${getWidth - 50},5`">
+      </polygon>
+      <polygon :fill="cornerColor[0]"
+        :points="`0,${getHeight - 55} 0,${getHeight} 55,${getHeight} 50,${getHeight - 5} 5,${getHeight - 5} 5,${getHeight - 50}`">
+      </polygon>
+      <polyline :fill="backgroundColor" :stroke="borderColor[0]" stroke-width="0.5"
+        :points="`0,0 ${getWidth - 58},0 ${getWidth - 51},8 ${getWidth - 8},8 ${getWidth - 8},51 ${getWidth},58 ${getWidth},${getHeight} 59,${getHeight} 50,${getHeight - 8} 8,${getHeight - 8} 8,${getHeight - 52} 0,${getHeight - 59} 0,0`">
+      </polyline>
+      <polygon :fill="cornerColor[1]" :points="`${getWidth - 11},11 ${getWidth - 11},21 ${getWidth - 21},11`"></polygon>
+      <polygon :fill="cornerColor[1]" :points="`12,${getHeight - 11} 22,${getHeight - 11} 12,${getHeight - 22}`">
+      </polygon>
+      <polygon filter="url(#filterId1)" :points="`3,30 3,${getHeight - 100} 2,${getHeight - 100} 2,30`"
+        :fill="borderColor[1]"></polygon>
+      <polygon filter="url(#filterId1)"
         :points="`${getWidth - 3},${getHeight - 30} ${getWidth - 3},100 ${getWidth - 2},100 ${getWidth - 2},${getHeight - 30}`"
-        :fill="borderColor[1]"
-      ></polygon>
+        :fill="borderColor[1]"></polygon>
     </svg>
 
     <div class="border-box-content">
@@ -55,6 +40,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEBorderBox5',
@@ -84,14 +70,30 @@ export default {
       },
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leFrameBox, 'width');
-    },
-    getHeight() {
-      return converse(this.height, this.$refs.leFrameBox, 'height');
-    },
+  data() {
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      resizeHandler: null
+    }
   },
+  methods: {
+    initSize() {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxFive, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxFive, 'height');
+    }
+  },
+  mounted() {
+    this.initSize()
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxFive, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxFive, 'height');
+    }, 1000)
+    window.addEventListener('resize', this.resizeHandler)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
+  }
 };
 </script>
 <style scoped lang="scss">

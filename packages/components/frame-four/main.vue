@@ -1,5 +1,5 @@
 <template>
-  <div class="l-border-box-four" :style="`width:${getWidth}px; height:${getHeight}px;`">
+  <div ref="leFrameBoxFour" class="l-border-box-four" :style="`width:${getWidth}px; height:${getHeight}px;`">
     <svg class="l-border-svg-container" :width="getWidth" :height="getHeight">
       <defs>
         <filter id="filterId" height="150%" width="150%" x="-20%" y="-20%">
@@ -46,6 +46,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEBorderBox4',
@@ -77,20 +78,40 @@ export default {
       default: 'transparent',
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leFrameBox, 'width');
-    },
-    getHeight() {
-      return converse(this.height, this.$refs.leFrameBox, 'height');
-    },
-    getTitleWidth() {
-      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
-    },
-    getTitleHeight() {
-      return converse(this.titleHeight, this.$refs.leTitleBox, 'height', 50);
+  data(){
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      getTitleWidth: 0,
+      getTitleHeight: 0,
+      resizeHandler: null,
+    }
+  },
+  methods:{
+    initSize(){
+      this.$nextTick(() => {
+        if (this.$refs.leFrameBoxFour) {
+          this.getWidth = converse(this.width, this.$refs.leFrameBoxFour, 'width');
+          this.getHeight = converse(this.height, this.$refs.leFrameBoxFour, 'height');
+          this.getTitleWidth = converse(this.titleWidth, this.$refs.leFrameBoxFour, 'width', 50);
+          this.getTitleHeight = converse(this.titleHeight, this.$refs.leFrameBoxFour, 'height', 50);
+        }
+      });
     },
   },
+  mounted(){
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxFour, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxFour, 'height');
+      this.getTitleWidth = converse(this.titleWidth, this.$refs.leFrameBoxFour, 'width', 50);
+      this.getTitleHeight = converse(this.titleHeight, this.$refs.leFrameBoxFour, 'height', 50);
+    }, 1000);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+        window.removeEventListener('resize', this.resizeHandler);
+    }
 };
 </script>
 <style scoped lang="scss">

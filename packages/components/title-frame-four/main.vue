@@ -1,7 +1,7 @@
 <template>
   <div
     class="l-title-border-four"
-    ref="leTitleBox"
+    ref="leTitleBoxFour"
     :style="` width:${getWidth}px; height:${getHeight}px;`"
   >
     <svg class="l-border-svg-container" :width="getWidth" :height="getHeight">
@@ -77,6 +77,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LETitleBox4',
@@ -104,17 +105,37 @@ export default {
       },
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leTitleBox, 'width', 300);
-    },
-    getHeight() {
-      return converse(this.height, this.$refs.leTitleBox, 'height', 30);
-    },
-    getTitleWidth() {
-      return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 50);
+  data() {
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      getTitleWidth: 0,
+      resizeHandler: null,
+    };
+  },
+  methods: {
+    initSize() {
+      this.$nextTick(() => {
+        if (this.$refs.leTitleBoxFour) {
+          this.getWidth = converse(this.width, this.$refs.leTitleBoxFour, 'width', 300);
+          this.getHeight = converse(this.height, this.$refs.leTitleBoxFour, 'height', 30);
+          this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBoxFour, 'width', 50);
+        }
+      });
     },
   },
+  mounted() {
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leTitleBoxFour, 'width', 300);
+      this.getHeight = converse(this.height, this.$refs.leTitleBoxFour, 'height', 30);
+      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBoxFour, 'width', 50);
+    }, 1000);
+     window.addEventListener('resize', this.resizeHandler)
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.resizeHandler);
+    }
 };
 </script>
 <style lang="scss" scoped>
