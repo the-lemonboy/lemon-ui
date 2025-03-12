@@ -77,7 +77,6 @@
 
 <script>
 import { converse } from '../../utils/conversion';
-import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
   name: 'LETitleBox4',

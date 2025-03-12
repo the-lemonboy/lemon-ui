@@ -1,6 +1,7 @@
 // 库打包的主要配置
 // 引入vue-loader插件
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -57,7 +58,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],
+  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin(), new CompressionPlugin()],
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.runtime.esm.js',

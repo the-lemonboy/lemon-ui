@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import func from 'vue-editor-bridge';
 import { converse } from '../../utils/conversion';
 import { throttle } from '../../utils/throttle-debounce.js';
 
