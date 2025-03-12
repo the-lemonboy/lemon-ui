@@ -1,7 +1,7 @@
 <template>
   <div
     class="l-title-border-five"
-    ref="leTitleBox"
+    ref="leTitleBoxFive"
     :style="` width:${getWidth}px; height:${getHeight}px;`"
   >
     <svg class="l-border-svg-cantainer" :width="getWidth" :height="getHeight">
@@ -138,6 +138,37 @@ export default {
       return converse(this.titleWidth, this.$refs.leTitleBox, 'width', 100);
     },
   },
+  data() {
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      getTitleWidth: 0,
+      resizeHandler: null,
+    }
+  },
+  methods: {
+    initSize() {
+      this.$nextTick(() => {
+        if (this.$refs.leTitleBox) {
+          this.getWidth = converse(this.width, this.$refs.leTitleBoxFive, 'width', 1200);
+          this.getHeight = converse(this.height, this.$refs.leTitleBoxFive, 'height', 80);
+          this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBoxFive, 'width', 100);
+        }
+      });
+    },
+  },
+  mounted(){
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leTitleBoxFive, 'width', 1200);
+      this.getHeight = converse(this.height, this.$refs.leTitleBoxFive, 'height', 80);
+      this.getTitleWidth = converse(this.titleWidth, this.$refs.leTitleBoxFive, 'width', 100);
+    }, 1000);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+        window.removeEventListener('resize', this.resizeHandler);
+    }
 };
 </script>
 <style lang="scss" scoped>

@@ -31,3 +31,4 @@ npminstall-debug.log
 # docs
 /docs/node_modules
 /docs/dist
+/lib

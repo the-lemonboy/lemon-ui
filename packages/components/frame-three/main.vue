@@ -1,5 +1,6 @@
 <template>
   <div
+  ref="leFrameBoxThree"
     class="l-border-box-three"
     :style="` background-color:${backgroundColor}; width:${getWidth}px; height:${getHeight}px`"
   >
@@ -89,6 +90,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEBorderBox3',
@@ -112,13 +114,33 @@ export default {
       default: 'transparent',
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leFrameBox, 'width');
+  data() {
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      resizeHandler: null,
+    };
+  },
+  methods: {
+    initSize() {
+      this.$nextTick(() => {
+        if (this.$refs.leFrameBoxThree) {
+          this.getWidth = converse(this.width, this.$refs.leFrameBoxThree, 'width');
+          this.getHeight = converse(this.height, this.$refs.leFrameBoxThree, 'height');
+        }
+      });
     },
-    getHeight() {
-      return converse(this.height, this.$refs.leFrameBox, 'height');
-    },
+  },
+  mounted(){
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxThree, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxThree, 'height');
+    }, 100);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
 };
 </script>

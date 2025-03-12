@@ -1,7 +1,7 @@
 <template>
   <div
     class="l-title-border-two"
-    ref="leTitleBox"
+    ref="leTitleBoxTwoTwo"
     :style="`width:${getWidth}px; height:${getHeight}px;`"
   >
     <svg class="l-border-svg-top-container" :width="getWidth" :height="getHeight">
@@ -80,7 +80,7 @@ import { converse } from '../../utils/conversion';
 import { throttle } from '../../utils/throttle-debounce.js';
 
 export default {
-  name: 'LETitleBox2',
+  name: 'leTitleBoxTwo2',
   props: {
     width: {
       type: String,
@@ -99,13 +99,33 @@ export default {
       default: 'orange',
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leTitleBox, 'width', 200);
+  data(){
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      resizeHandler: null
+    };
+  },
+  methods:{
+    initSize(){
+      this.$nextTick(() => {
+        if (this.$refs.leTitleBoxTwo) {
+          this.getWidth = converse(this.width, this.$refs.leTitleBoxTwo, 'width');
+          this.getHeight = converse(this.height, this.$refs.leTitleBoxTwo, 'height');
+        }
+      });
     },
-    getHeight() {
-      return converse(this.height, this.$refs.leTitleBox, 'height', 20);
-    },
+  },
+  mounted(){
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leTitleBoxTwo, 'width');
+      this.getHeight = converse(this.height, this.$refs.leTitleBoxTwo, 'height');
+    }, 100);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
 };
 </script>

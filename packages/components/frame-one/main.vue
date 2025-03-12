@@ -1,7 +1,7 @@
 <template>
   <div
     class="l-border-box-one"
-    ref="leFrameBox"
+    ref="leFrameBoxOne"
     :style="`box-shadow: inset 0 0 10px ${borderColor}; border: 1px solid ${borderColor[0]}; background-color:${backgroundColor}; width:${getWidth}px; height:${getHeight}px`"
   >
     <svg class="l-border-svg-container" :width="getWidth" :height="getHeight">
@@ -49,6 +49,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEBorderBox1',
@@ -76,13 +77,33 @@ export default {
       default: 'transparent',
     },
   },
-  computed: {
-    getWidth() {
-      return converse(this.width, this.$refs.leFrameBox, 'width');
+  data(){
+    return {
+      getWidth: 0,
+      getHeight: 0,
+      resizeHandler: null,
+    };
+  },
+  methods: {
+    initSize() {
+      this.$nextTick(() => {
+        if (this.$refs.leFrameBoxOne) {
+          this.getWidth = converse(this.width, this.$refs.leFrameBoxOne, 'width');
+          this.getHeight = converse(this.height, this.$refs.leFrameBoxOne, 'height');
+        }
+      });
     },
-    getHeight() {
-      return converse(this.height, this.$refs.leFrameBox, 'height');
-    },
+  },
+  mounted() {
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxOne, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxOne, 'height');
+    }, 1000);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
 };
 </script>

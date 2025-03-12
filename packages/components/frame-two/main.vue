@@ -1,7 +1,7 @@
 <template>
   <div
     class="l-border-box-two"
-    ref="leFrameBox"
+    ref="leFrameBoxTwo"
     :style="`width:${getWidth}px; height:${getHeight}px;`"
   >
     <svg class="l-border-svg-container" :width="getWidth" :height="getHeight">
@@ -82,6 +82,7 @@
 
 <script>
 import { converse } from '../../utils/conversion';
+import { throttle } from '../../utils/throttle-debounce.js'
 
 export default {
   name: 'LEBorderBox2',
@@ -113,24 +114,40 @@ export default {
       default: 'transparent',
     },
   },
-  computed: {
-    getTitleHeight() {
-      return converse(this.titleHeight, this.$refs.leFrameBox, 'height');
-    },
-    getWidth() {
-      return converse(this.width, this.$refs.leFrameBox, 'width');
-    },
-    getHeight() {
-      return converse(this.height, this.$refs.leFrameBox, 'height');
-    },
-  },
   data() {
     return {
       gradient: 'gradient',
       mask: 'mask',
       path: 'path',
+      getTitleHeight: 0,
+      getWidth: 0,
+      getHeight: 0,
+      resizeHandler: null,
     };
   },
+  methods:{
+    initSize(){
+      this.$nextTick(() => {
+        if (this.$refs.leFrameBoxTwo) {
+          this.getWidth = converse(this.width, this.$refs.leFrameBoxTwo, 'width');
+          this.getHeight = converse(this.height, this.$refs.leFrameBoxTwo, 'height');
+          this.getTitleHeight = converse(this.titleHeight, this.$refs.leFrameBoxTwo, 'height');
+        }
+      });
+    },
+  },
+  mounted(){
+    this.initSize();
+    this.resizeHandler = throttle(() => {
+      this.getWidth = converse(this.width, this.$refs.leFrameBoxTwo, 'width');
+      this.getHeight = converse(this.height, this.$refs.leFrameBoxTwo, 'height');
+      this.getTitleHeight = converse(this.titleHeight, this.$refs.leFrameBoxTwo, 'height');
+    }, 1000);
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+        window.removeEventListener('resize', this.resizeHandler);
+    }
 };
 </script>
 <style lang="scss" scoped>
